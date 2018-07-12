@@ -1,10 +1,38 @@
 import React, { Component } from "react";
+import Animal from "./Animal";
 
 export default class AnimalList extends Component {
+  state = {
+    animals: [
+      { id: 1, name: "Doodles" },
+      { id: 2, name: "Jack" },
+      { id: 3, name: "Angus" },
+      { id: 4, name: "Henley" },
+      { id: 5, name: "Derkins" },
+      { id: 6, name: "Checkers" }
+    ],
+    owners: [
+      { id: 1, name: "Ryan Tanay" },
+      { id: 2, name: "Emma Beaton" },
+      { id: 3, name: "Dani Adkins" },
+      { id: 4, name: "Adam Oswalt" },
+      { id: 5, name: "Fletcher Bangs" },
+      { id: 6, name: "Angela Lee" }
+    ],
+    animalOwners: [
+      { id: 1, animalId: 1, ownerId: 4 },
+      { id: 2, animalId: 2, ownerId: 2 },
+      { id: 3, animalId: 3, ownerId: 1 },
+      { id: 4, animalId: 4, ownerId: 6 },
+      { id: 5, animalId: 5, ownerId: 5 },
+      { id: 6, animalId: 6, ownerId: 5 }
+    ]
+  };
+
   render() {
-    const animals = this.props.animals;
-    const owners = this.props.owners;
-    const animalOwners = this.props.animalOwners;
+    const animals = this.state.animals;
+    const owners = this.state.owners;
+    const animalOwners = this.state.animalOwners;
 
     const ownerMap = {};
     owners.forEach(function(owner) {
@@ -23,12 +51,7 @@ export default class AnimalList extends Component {
 
     return (
       <React.Fragment>
-        {animalOwners.map(animal => (
-          <div>
-            Owner: {animal.ownerName + " "}
-            Animal: {animal.animalName}
-          </div>
-        ))}
+        {animalOwners.map(animal => <Animal key={animal.id} animal={animal} />)}
       </React.Fragment>
     );
   }
